@@ -1,7 +1,9 @@
 package controller
 
 import (
+	"admin-api/api/entity"
 	"admin-api/api/service"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,9 +22,13 @@ import (
 // @router /api/role/list [get]
 // @Security ApiKeyAuth
 func GetSysRoleList(c *gin.Context) {
-	// RoleName := c.Query("roleName")
-	// RoleStatus := c.Query("roleStatus")
-	// service.SysRoleService().GetSysRoleList(c, RoleName, RoleStatus)
+	PageNum, _ := strconv.Atoi(c.Query("pageNum"))
+	PageSize, _ := strconv.Atoi(c.Query("pageSize"))
+	RoleName := c.Query("roleName")
+	Status := c.Query("status")
+	BeginTime := c.Query("beginTime")
+	EndTime := c.Query("endTime")
+	service.SysRoleService().GetSysRoleList(c, PageNum, PageSize, RoleName, Status, BeginTime, EndTime)
 }
 
 // 角色下拉列表
@@ -34,4 +40,31 @@ func GetSysRoleList(c *gin.Context) {
 // @Security ApikeyAuth
 func QuerySysRoleVoList(c *gin.Context) {
 	service.SysRoleService().QuerySysRoleVoList(c)
+}
+
+// 新增角色
+// @Summary 新增角色接口
+// @Produce json
+// @Description 新增角色接口
+// @Param data body entity.AddSysRoleDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/role/add [post]
+// @Security ApikeyAuth
+func CreateSysRole(c *gin.Context) {
+	var dto entity.AddSysRoleDto
+	_ = c.BindJSON(&dto)
+	service.SysRoleService().CreateSysRole(c, dto)
+}
+
+// 角色详情
+// @Summary 角色详情接口
+// @Produce json
+// @Description 角色详情接口
+// @Param id query int true "id"
+// @Success 200 {object} result.Result
+// @router /api/role/info/list [get]
+// @Security ApikeyAuth
+func GetSysRoleById(c *gin.Context) {
+	Id, _ := strconv.Atoi(c.Query("id"))
+	service.SysRoleService().GetSysRoleById(c, Id)
 }

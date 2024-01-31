@@ -39,6 +39,10 @@ func register(router *gin.Engine) {
 		jwt.GET("/dept/vo/list", controller.QuerySysDeptVoList)            // 获取部门列表
 		jwt.GET("/post/vo/list", controller.QuerySysPostVoList)            // 获取岗位列表
 		jwt.GET("/role/vo/list", controller.QuerySysRoleVoList)            // 获取角色列表
+		jwt.GET("/role/list", controller.GetSysRoleList)                   // 获取角色列表
+		jwt.POST("/role/add", controller.CreateSysRole)                    // 新增角色
+		jwt.GET("/role/info", controller.GetSysRoleById)                   // 获取角色详情
+		// jwt.PUT("/role/update", controller.UpdateSysRole)                  // 修改角色
 		// jwt.POST("/post/add", controller.CreateSysPost)
 	}
 }
