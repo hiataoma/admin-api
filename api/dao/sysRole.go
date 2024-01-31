@@ -72,3 +72,16 @@ func GetSysRoleById(Id int) (sysRole entity.SysRole) {
 	Db.First(&sysRole, Id)
 	return sysRole
 }
+
+// 更新角色
+func UpdateSysRole(dto entity.UpdateSysRoleDto) (sysRole entity.SysRole) {
+	Db.First(&sysRole, dto.Id)
+	sysRole.RoleName = dto.RoleName
+	sysRole.RoleKey = dto.RoleKey
+	sysRole.Status = dto.Status
+	if dto.Description != "" {
+		sysRole.Description = dto.Description
+	}
+	Db.Save(&sysRole)
+	return sysRole
+}

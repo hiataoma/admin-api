@@ -13,6 +13,7 @@ type ISysRoleService interface {
 	GetSysRoleList(c *gin.Context, PageNum, PageSize int, RoleName, Status, BeginTime, EndTime string)
 	CreateSysRole(c *gin.Context, dto entity.AddSysRoleDto)
 	GetSysRoleById(c *gin.Context, Id int)
+	UpdateSysRole(c *gin.Context, dto entity.UpdateSysRoleDto)
 }
 
 type SysRoleServiceImpl struct{}
@@ -44,6 +45,12 @@ func (s SysRoleServiceImpl) CreateSysRole(c *gin.Context, dto entity.AddSysRoleD
 		return
 	}
 	result.Success(c, true)
+}
+
+// 更新角色
+func (s SysRoleServiceImpl) UpdateSysRole(c *gin.Context, dto entity.UpdateSysRoleDto) {
+	sysRole := dao.UpdateSysRole(dto)
+	result.Success(c, sysRole)
 }
 
 // 获取用户信息详情

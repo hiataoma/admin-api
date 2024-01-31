@@ -31,18 +31,18 @@ func register(router *gin.Engine) {
 	router.POST("/api/login", controller.Login)
 	jwt := router.Group("/api", middleware.AuthMiddleware(), middleware.LogMiddleware())
 	{
-		jwt.GET("/admin/list", controller.GetSysAdminList)                 // 分页获取用户列表
-		jwt.GET("/admin/info", controller.GetSysAdminInfo)                 // 根据id查询用户详情
-		jwt.POST("/admin/add", controller.CreateSysAdmin)                  // 新增用户
-		jwt.PUT("/admin/update", controller.UpdateSysAdmin)                // 修改用户
-		jwt.PUT("/admin/updatePassword", controller.ResetSysAdminPassword) // 重置密码
-		jwt.GET("/dept/vo/list", controller.QuerySysDeptVoList)            // 获取部门列表
-		jwt.GET("/post/vo/list", controller.QuerySysPostVoList)            // 获取岗位列表
-		jwt.GET("/role/vo/list", controller.QuerySysRoleVoList)            // 获取角色列表
-		jwt.GET("/role/list", controller.GetSysRoleList)                   // 获取角色列表
-		jwt.POST("/role/add", controller.CreateSysRole)                    // 新增角色
-		jwt.GET("/role/info", controller.GetSysRoleById)                   // 获取角色详情
-		// jwt.PUT("/role/update", controller.UpdateSysRole)                  // 修改角色
-		// jwt.POST("/post/add", controller.CreateSysPost)
+		jwt.GET("/admin/list", controller.GetSysAdminList)                  // 分页获取用户列表
+		jwt.GET("/admin/info", controller.GetSysAdminInfo)                  // 根据id查询用户详情
+		jwt.POST("/admin/add", controller.CreateSysAdmin)                   // 新增用户
+		jwt.PUT("/admin/update", controller.UpdateSysAdmin)                 // 修改用户
+		jwt.PUT("/admin/updatePassword", controller.ResetSysAdminPassword)  // 重置密码
+		jwt.GET("/dept/vo/list", controller.QuerySysDeptVoList)             // 获取部门列表
+		jwt.GET("/post/vo/list", controller.QuerySysPostVoList)             // 获取岗位列表
+		jwt.GET("/role/vo/list", controller.QuerySysRoleVoList)             // 获取角色列表
+		jwt.GET("/role/list", controller.GetSysRoleList)                    // 获取角色列表
+		jwt.POST("/role/add", controller.CreateSysRole)                     // 新增角色
+		jwt.GET("/role/info", controller.GetSysRoleById)                    // 获取角色详情
+		jwt.PUT("/role/update", controller.UpdateSysRole)                   // 修改角色
+		jwt.GET("/sysOperationLog/list", controller.GetSysOperationLogList) // 分页获取操作日志列表
 	}
 }
