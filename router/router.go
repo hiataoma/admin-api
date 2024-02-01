@@ -44,5 +44,6 @@ func register(router *gin.Engine) {
 		jwt.GET("/role/info", controller.GetSysRoleById)                    // 获取角色详情
 		jwt.PUT("/role/update", controller.UpdateSysRole)                   // 修改角色
 		jwt.GET("/sysOperationLog/list", controller.GetSysOperationLogList) // 分页获取操作日志列表
+		jwt.GET("/sysLoginInfo/list", controller.GetSysLoginInfoList)       // 分页获取登录日志列表
 	}
 }
