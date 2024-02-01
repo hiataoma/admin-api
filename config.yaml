@@ -28,7 +28,7 @@ redis:
 # 图片地址和ip
 imageSettings:
   # 本地磁盘地址
-  uploadDir: /admin-go-api/upload/
+  uploadDir: /admin-api/upload/
   # 本地ip地址
   imageHost: http://localhost:2002
 
