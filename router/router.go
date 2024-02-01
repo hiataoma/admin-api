@@ -51,5 +51,6 @@ func register(router *gin.Engine) {
 		jwt.GET("/menu/list", controller.GetSysMenuList)                            // 获取菜单列表
 		jwt.GET("/dept/list", controller.GetSysDeptList)                            // 获取部门分页列表
 		jwt.GET("/post/list", controller.GetSysPostList)                            // 获取岗页分页列表
+		jwt.POST("/upload", controller.Upload)                                      // 上传文件
 	}
 }
