@@ -92,20 +92,20 @@ func UpdateSysAdmin(dto entity.UpdateSysAdminDto) (sysAdmin entity.SysAdmin) {
 	return sysAdmin
 }
 
-// // 根据id删除用户
-// func DeleteSysAdminById(dto entity.SysAdminIdDto) {
-// 	Db.First(&entity.SysAdmin{}, dto.Id)
-// 	Db.Delete(&entity.SysAdmin{}, dto.Id)
-// 	Db.Where("admin_id = ?", dto.Id).Delete(&entity.SysAdminRole{})
-// }
+// 根据id删除用户
+func DeleteSysAdminById(dto entity.SysAdminIdDto) {
+	Db.First(&entity.SysAdmin{}, dto.Id)
+	Db.Delete(&entity.SysAdmin{}, dto.Id)
+	Db.Where("admin_id = ?", dto.Id).Delete(&entity.SysAdminRole{})
+}
 
-// // 修改用户状态
-// func UpdateSysAdminStatus(dto entity.UpdateSysAdminStatusDto) {
-// 	var sysAdmin entity.SysAdmin
-// 	Db.First(&sysAdmin, dto.Id)
-// 	sysAdmin.Status = dto.Status
-// 	Db.Save(&sysAdmin)
-// }
+// 修改用户状态
+func UpdateSysAdminStatus(dto entity.UpdateSysAdminStatusDto) {
+	var sysAdmin entity.SysAdmin
+	Db.First(&sysAdmin, dto.Id)
+	sysAdmin.Status = dto.Status
+	Db.Save(&sysAdmin) // 保存当前用户信息
+}
 
 // 重置密码
 func ResetSysAdminPassword(dto entity.ResetSysAdminPasswordDto) {

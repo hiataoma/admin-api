@@ -14,6 +14,7 @@ type ISysRoleService interface {
 	CreateSysRole(c *gin.Context, dto entity.AddSysRoleDto)
 	GetSysRoleById(c *gin.Context, Id int)
 	UpdateSysRole(c *gin.Context, dto entity.UpdateSysRoleDto)
+	UpdateSysRoleStatus(c *gin.Context, dto entity.UpdateSysRoleStatusDto)
 }
 
 type SysRoleServiceImpl struct{}
@@ -57,6 +58,11 @@ func (s SysRoleServiceImpl) UpdateSysRole(c *gin.Context, dto entity.UpdateSysRo
 func (s SysRoleServiceImpl) GetSysRoleById(c *gin.Context, Id int) {
 	sysRole := dao.GetSysRoleById(Id)
 	result.Success(c, sysRole)
+}
+
+// 更新角色状态
+func (s SysRoleServiceImpl) UpdateSysRoleStatus(c *gin.Context, dto entity.UpdateSysRoleStatusDto) {
+	result.Success(c, dao.UpdateSysRoleStatus(dto))
 }
 
 var sysRoleService = SysRoleServiceImpl{}

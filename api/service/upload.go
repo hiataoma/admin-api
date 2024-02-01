@@ -7,6 +7,9 @@ import (
 	"admin-api/common/config"
 	"admin-api/common/result"
 	"fmt"
+	"path"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,9 +26,9 @@ func (u UploadServiceImpl) Upload(c *gin.Context) {
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.FILEUPLOADERROR), result.ApiCode.GetMessage(result.ApiCode.FILEUPLOADERROR))
 	}
-	// now := time.Now()
-	// ext := path.Ext(file.Filename)
-	// fileName := strconv.Itoa(now.Nanosecond()) + ext
+	now := time.Now()
+	ext := path.Ext(file.Filename)
+	fileName := strconv.Itoa(now.Nanosecond()) + ext
 	// filePath := fmt.Sprintf("%s%s%s%s",
 	// 	config.Config.ImageSettings.UploadDir,
 	// 	fmt.Sprintf("%04d", now.Year()),
@@ -33,13 +36,13 @@ func (u UploadServiceImpl) Upload(c *gin.Context) {
 	// 	fmt.Sprintf("%04d", now.Day()))
 	// util.CreateDir(filePath)
 	// fullPath := filePath + "/" + fileName
+	// result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
 
-	filePath := fmt.Sprintf("%s", config.Config.ImageSettings.UploadDir)
-	fullPath := filePath
+	// 链接如何反显
 
-	fmt.Println(fullPath)
-
-	c.SaveUploadedFile(file, fullPath)
+	dst := fmt.Sprintf("/Users/haitao/Desktop/haitaoProject/admin-api/upload/%s", fileName)
+	c.SaveUploadedFile(file, dst)
+	fullPath := "/admin-api/upload/" + fileName
 	result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
 }
 

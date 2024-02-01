@@ -82,3 +82,16 @@ func UpdateSysRole(c *gin.Context) {
 	_ = c.BindJSON(&dto)
 	service.SysRoleService().UpdateSysRole(c, dto)
 }
+
+// @Summary 修改角色转台
+// @Produce json
+// @Description 修改角色状态
+// @Param data body entity.UpdateSysRoleStatusDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/role/updateStatus [put]
+// @Security ApikeyAuth
+func UpdateSysRoleStatus(c *gin.Context) {
+	var dto entity.UpdateSysRoleStatusDto
+	_ = c.BindJSON(&dto)
+	service.SysRoleService().UpdateSysRoleStatus(c, dto)
+}

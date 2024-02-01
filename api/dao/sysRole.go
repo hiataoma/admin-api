@@ -85,3 +85,15 @@ func UpdateSysRole(dto entity.UpdateSysRoleDto) (sysRole entity.SysRole) {
 	Db.Save(&sysRole)
 	return sysRole
 }
+
+// 更新状态角色
+func UpdateSysRoleStatus(dto entity.UpdateSysRoleStatusDto) bool {
+	var sysRole entity.SysRole
+	Db.First(&sysRole, dto.Id)
+	sysRole.Status = dto.Status
+	tx := Db.Save(&sysRole)
+	if tx.RowsAffected > 0 {
+		return true
+	}
+	return false
+}

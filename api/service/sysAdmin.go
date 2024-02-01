@@ -17,8 +17,8 @@ type ISysAminService interface {
 	CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto)
 	GetSysAdminInfo(c *gin.Context, Id int)
 	UpdateSysAdmin(c *gin.Context, dto entity.UpdateSysAdminDto)
-	// DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
-	// UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
+	DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
+	UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
 	ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
 	GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
 	// UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
@@ -131,6 +131,19 @@ func (s SysAdminServiceImpl) ResetSysAdminPassword(c *gin.Context, dto entity.Re
 // 用户更新
 func (s SysAdminServiceImpl) UpdateSysAdmin(c *gin.Context, dto entity.UpdateSysAdminDto) {
 	result.Success(c, dao.UpdateSysAdmin(dto))
+}
+
+// 变更用户状态
+
+func (s SysAdminServiceImpl) UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto) {
+	dao.UpdateSysAdminStatus(dto)
+	result.Success(c, true)
+}
+
+// 删除当前用户根据ID
+func (s SysAdminServiceImpl) DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto) {
+	dao.DeleteSysAdminById(dto)
+	result.Success(c, true)
 }
 
 var sysAdminService = SysAdminServiceImpl{}
