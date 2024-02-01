@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"admin-api/api/entity"
 	"admin-api/api/service"
 	"strconv"
 
@@ -26,4 +27,18 @@ func GetSysOperationLogList(c *gin.Context) {
 	PageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	PageNum, _ := strconv.Atoi(c.Query("pageNum"))
 	service.SysOperationLogService().GetSysOperationLogList(c, Username, BeginTime, EndTime, PageSize, PageNum)
+}
+
+// 根据id删除操作日志
+// @Summary 根据id删除操作日志
+// @Produce json
+// @Description 根据id删除操作日志
+// @Param data body entity.SysOperationLogIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/sysOperationLog/delete [delete]
+// @Security ApiKeyAuth
+func DeleteSysOperationLogById(c *gin.Context) {
+	var dto entity.SysOperationLogIdDto
+	_ = c.BindJSON(&dto)
+	service.SysOperationLogService().DeleteSysOperationLogById(c, dto)
 }

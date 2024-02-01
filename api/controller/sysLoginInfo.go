@@ -3,6 +3,7 @@
 package controller
 
 import (
+	"admin-api/api/entity"
 	"admin-api/api/service"
 	"strconv"
 
@@ -54,11 +55,11 @@ func GetSysLoginInfoList(c *gin.Context) {
 // // @Success 200 {object} result.Result
 // // @router /api/sysLoginInfo/delete [delete]
 // // @Security ApiKeyAuth
-// func DeleteSysLoginInfoById(c *gin.Context) {
-// 	var dto entity.SysLoginInfoIdDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysLoginInfoService().DeleteSysLoginInfo(c, dto)
-// }
+func DeleteSysLoginInfoById(c *gin.Context) {
+	var dto entity.SysLoginInfoIdDto
+	_ = c.BindJSON(&dto)
+	service.SysLoginInfoService().DeleteSysLoginInfo(c, dto)
+}
 
 // // 清空登录日志
 // // @Summary 清空登录日志接口

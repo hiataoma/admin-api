@@ -2,6 +2,7 @@ package service
 
 import (
 	"admin-api/api/dao"
+	"admin-api/api/entity"
 	"admin-api/common/result"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 type ISysLoginInfoService interface {
 	GetSysLoginInfoList(c *gin.Context, Username, LoginStatus, BeginTime, EndTime string, PageSize, pageNum int)
 	// BatchDeleteSysLoginInfo(c *gin.Context, dto entity.DelSysLoginInfoDto)
-	// DeleteSysLoginInfo(c *gin.Context, dto entity.SysLoginInfoIdDto)
+	DeleteSysLoginInfo(c *gin.Context, dto entity.SysLoginInfoIdDto)
 	// CleanSysLoginInfo(c *gin.Context)
 }
 
@@ -26,6 +27,13 @@ func (s SysLoginInfoServiceImpl) GetSysLoginInfoList(c *gin.Context, Username, L
 	}
 	sysLoginInfo, count := dao.GetSysLoginInfoList(Username, LoginStatus, BeginTime, EndTime, PageSize, pageNum)
 	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": pageNum, "list": sysLoginInfo})
+}
+
+// 删除登录信息列表
+
+func (s SysLoginInfoServiceImpl) DeleteSysLoginInfo(c *gin.Context, dto entity.SysLoginInfoIdDto) {
+	dao.DeleteSysLoginInfoById(dto)
+	result.Success(c, true)
 }
 
 var sysLoginInfoService = SysLoginInfoServiceImpl{}
