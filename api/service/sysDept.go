@@ -11,7 +11,7 @@ import (
 )
 
 type ISysDeptService interface {
-	// GetSysDeptList(c *gin.Context, DeptName, DeptStatus string)
+	GetSysDeptList(c *gin.Context, DeptName, DeptStatus string)
 	// CreateSysDept(c *gin.Context, sysDept entity.SysDept)
 	// GetSysDeptById(c *gin.Context, Id int)
 	// UpdateSysDept(c *gin.Context, dept entity.SysDept)
@@ -58,9 +58,9 @@ func (s SysDeptServiceImpl) QuerySysDeptVoList(c *gin.Context) {
 // }
 
 // // 查询部门列表
-// func (s SysDeptServiceImpl) GetSysDeptList(c *gin.Context, DeptName, DeptStatus string) {
-// 	result.Success(c, dao.GetSysDeptList(DeptName, DeptStatus))
-// }
+func (s SysDeptServiceImpl) GetSysDeptList(c *gin.Context, DeptName, DeptStatus string) {
+	result.Success(c, dao.GetSysDeptList(DeptName, DeptStatus))
+}
 
 var sysDeptService = SysDeptServiceImpl{}
 

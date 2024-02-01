@@ -6,6 +6,7 @@ package controller
 import (
 	"admin-api/api/entity"
 	"admin-api/api/service"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,15 +38,15 @@ var sysPost entity.SysPost
 // // @Success 200 {object} result.Result
 // // @router /api/post/list [get]
 // // @Security ApiKeyAuth
-// func GetSysPostList(c *gin.Context) {
-// 	PageNum, _ := strconv.Atoi(c.Query("pageNum"))
-// 	PageSize, _ := strconv.Atoi(c.Query("pageSize"))
-// 	PostName := c.Query("postName")
-// 	PostStatus := c.Query("postStatus")
-// 	BeginTime := c.Query("beginTime")
-// 	EndTime := c.Query("endTime")
-// 	service.SysPostService().GetSysPostList(c, PageNum, PageSize, PostName, PostStatus, BeginTime, EndTime)
-// }
+func GetSysPostList(c *gin.Context) {
+	PageNum, _ := strconv.Atoi(c.Query("pageNum"))
+	PageSize, _ := strconv.Atoi(c.Query("pageSize"))
+	PostName := c.Query("postName")
+	PostStatus := c.Query("postStatus")
+	BeginTime := c.Query("beginTime")
+	EndTime := c.Query("endTime")
+	service.SysPostService().GetSysPostList(c, PageNum, PageSize, PostName, PostStatus, BeginTime, EndTime)
+}
 
 // // 根据id查询岗位
 // // @Summary 根据id查询岗位

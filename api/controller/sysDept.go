@@ -21,11 +21,11 @@ var sysDept entity.SysDept
 // // @Success 200 {object} result.Result
 // // @router /api/dept/list [get]
 // // @Security ApiKeyAuth
-// func GetSysDeptList(c *gin.Context) {
-// 	DeptName := c.Query("deptName")
-// 	DeptStatus := c.Query("deptStatus")
-// 	service.SysDeptService().GetSysDeptList(c, DeptName, DeptStatus)
-// }
+func GetSysDeptList(c *gin.Context) {
+	DeptName := c.Query("deptName")
+	DeptStatus := c.Query("deptStatus")
+	service.SysDeptService().GetSysDeptList(c, DeptName, DeptStatus)
+}
 
 // // 新增部门
 // // @Summary 新增部门接口
