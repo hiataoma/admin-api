@@ -6,11 +6,7 @@ package service
 import (
 	"admin-api/common/config"
 	"admin-api/common/result"
-	"admin-api/common/util"
 	"fmt"
-	"path"
-	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,16 +23,22 @@ func (u UploadServiceImpl) Upload(c *gin.Context) {
 	if err != nil {
 		result.Failed(c, int(result.ApiCode.FILEUPLOADERROR), result.ApiCode.GetMessage(result.ApiCode.FILEUPLOADERROR))
 	}
-	now := time.Now()
-	ext := path.Ext(file.Filename)
-	fileName := strconv.Itoa(now.Nanosecond()) + ext
-	filePath := fmt.Sprintf("%s%s%s%s",
-		config.Config.ImageSettings.UploadDir,
-		fmt.Sprintf("%04d", now.Year()),
-		fmt.Sprintf("%02d", now.Month()),
-		fmt.Sprintf("%04d", now.Day()))
-	util.CreateDir(filePath)
-	fullPath := filePath + "/" + fileName
+	// now := time.Now()
+	// ext := path.Ext(file.Filename)
+	// fileName := strconv.Itoa(now.Nanosecond()) + ext
+	// filePath := fmt.Sprintf("%s%s%s%s",
+	// 	config.Config.ImageSettings.UploadDir,
+	// 	fmt.Sprintf("%04d", now.Year()),
+	// 	fmt.Sprintf("%02d", now.Month()),
+	// 	fmt.Sprintf("%04d", now.Day()))
+	// util.CreateDir(filePath)
+	// fullPath := filePath + "/" + fileName
+
+	filePath := fmt.Sprintf("%s", config.Config.ImageSettings.UploadDir)
+	fullPath := filePath
+
+	fmt.Println(fullPath)
+
 	c.SaveUploadedFile(file, fullPath)
 	result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
 }
