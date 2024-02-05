@@ -111,6 +111,12 @@ func UpdateSysRoleStatus(dto entity.UpdateSysRoleStatusDto) bool {
 	return false
 }
 
+// 根据id删除角色
+func DeleteSysRoleById(dto entity.SysRoleIdDto) {
+	Db.Table("sys_role").Delete(&entity.SysRole{}, dto.Id)
+	Db.Table("sys_role_menu").Where("role_id = ?", dto.Id).Delete(&entity.SysRoleMenu{})
+}
+
 // 分配权限
 func AssignPermissions(menu entity.RoleMenu) (err error) {
 	err = Db.Table("sys_role_menu").Where("role_id = ?", menu.Id).Delete(&entity.SysRoleMenu{}).Error

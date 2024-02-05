@@ -12,11 +12,11 @@ import (
 )
 
 type ISysMenuService interface {
-	// CreateSysMenu(c *gin.Context, menu entity.SysMenu)
+	CreateSysMenu(c *gin.Context, menu entity.SysMenu)
 	QuerySysMenuVoList(c *gin.Context)
 	GetSysMenu(c *gin.Context, Id int)
 	UpdateSysMenu(c *gin.Context, menu entity.SysMenu)
-	// DeleteSysMenu(c *gin.Context, dto entity.SysMenuIdDto)
+	DeleteSysMenu(c *gin.Context, dto entity.SysMenuIdDto)
 	GetSysMenuList(c *gin.Context, MenuName string, MenuStatus string)
 }
 

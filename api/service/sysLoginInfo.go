@@ -10,9 +10,9 @@ import (
 
 type ISysLoginInfoService interface {
 	GetSysLoginInfoList(c *gin.Context, Username, LoginStatus, BeginTime, EndTime string, PageSize, pageNum int)
-	// BatchDeleteSysLoginInfo(c *gin.Context, dto entity.DelSysLoginInfoDto)
+	BatchDeleteSysLoginInfo(c *gin.Context, dto entity.DelSysLoginInfoDto)
 	DeleteSysLoginInfo(c *gin.Context, dto entity.SysLoginInfoIdDto)
-	// CleanSysLoginInfo(c *gin.Context)
+	CleanSysLoginInfo(c *gin.Context)
 }
 
 type SysLoginInfoServiceImpl struct{}
@@ -33,6 +33,18 @@ func (s SysLoginInfoServiceImpl) GetSysLoginInfoList(c *gin.Context, Username, L
 
 func (s SysLoginInfoServiceImpl) DeleteSysLoginInfo(c *gin.Context, dto entity.SysLoginInfoIdDto) {
 	dao.DeleteSysLoginInfoById(dto)
+	result.Success(c, true)
+}
+
+// 批量删除登录日志
+func (s SysLoginInfoServiceImpl) BatchDeleteSysLoginInfo(c *gin.Context, dto entity.DelSysLoginInfoDto) {
+	dao.BatchDeleteSysLoginInfo(dto)
+	result.Success(c, true)
+}
+
+// 清空登录日志
+func (s SysLoginInfoServiceImpl) CleanSysLoginInfo(c *gin.Context) {
+	dao.CleanSysLoginInfo()
 	result.Success(c, true)
 }
 

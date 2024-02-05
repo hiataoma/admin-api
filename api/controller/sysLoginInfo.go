@@ -33,41 +33,41 @@ func GetSysLoginInfoList(c *gin.Context) {
 	service.SysLoginInfoService().GetSysLoginInfoList(c, Username, LoginStatus, BeginTime, EndTime, PageSize, PageNum)
 }
 
-// // 批量删除登录日志
-// // @Summary 批量删除登录日志接口
-// // @Produce json
-// // @Description 批量删除登录日志接口
-// // @Param data body entity.DelSysLoginInfoDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/sysLoginInfo/batch/delete [delete]
-// // @Security ApiKeyAuth
-// func BatchDeleteSysLoginInfo(c *gin.Context) {
-// 	var dto entity.DelSysLoginInfoDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysLoginInfoService().BatchDeleteSysLoginInfo(c, dto)
-// }
+// 批量删除登录日志
+// @Summary 批量删除登录日志接口
+// @Produce json
+// @Description 批量删除登录日志接口
+// @Param data body entity.DelSysLoginInfoDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/sysLoginInfo/batch/delete [delete]
+// @Security ApiKeyAuth
+func BatchDeleteSysLoginInfo(c *gin.Context) {
+	var dto entity.DelSysLoginInfoDto
+	_ = c.BindJSON(&dto)
+	service.SysLoginInfoService().BatchDeleteSysLoginInfo(c, dto)
+}
 
-// // 根据ID删除登录日志
-// // @Summary 根据ID删除登录日志接口
-// // @Produce json
-// // @Description 根据ID删除登录日志接口
-// // @Param data body entity.SysLoginInfoIdDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/sysLoginInfo/delete [delete]
-// // @Security ApiKeyAuth
+// 根据ID删除登录日志
+// @Summary 根据ID删除登录日志接口
+// @Produce json
+// @Description 根据ID删除登录日志接口
+// @Param data body entity.SysLoginInfoIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/sysLoginInfo/delete [delete]
+// @Security ApiKeyAuth
 func DeleteSysLoginInfoById(c *gin.Context) {
 	var dto entity.SysLoginInfoIdDto
 	_ = c.BindJSON(&dto)
 	service.SysLoginInfoService().DeleteSysLoginInfo(c, dto)
 }
 
-// // 清空登录日志
-// // @Summary 清空登录日志接口
-// // @Produce json
-// // @Description 清空登录日志接口
-// // @Success 200 {object} result.Result
-// // @router /api/sysLoginInfo/clean [delete]
-// // @Security ApiKeyAuth
-// func CleanSysLoginInfo(c *gin.Context) {
-// 	service.SysLoginInfoService().CleanSysLoginInfo(c)
-// }
+// 清空登录日志
+// @Summary 清空登录日志接口
+// @Produce json
+// @Description 清空登录日志接口
+// @Success 200 {object} result.Result
+// @router /api/sysLoginInfo/clean [delete]
+// @Security ApiKeyAuth
+func CleanSysLoginInfo(c *gin.Context) {
+	service.SysLoginInfoService().CleanSysLoginInfo(c)
+}

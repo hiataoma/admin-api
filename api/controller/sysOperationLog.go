@@ -42,3 +42,14 @@ func DeleteSysOperationLogById(c *gin.Context) {
 	_ = c.BindJSON(&dto)
 	service.SysOperationLogService().DeleteSysOperationLogById(c, dto)
 }
+
+// 清空操作日志
+// @Summary 清空操作日志接口
+// @Produce json
+// @Description 清空操作日志接口
+// @Success 200 {object} result.Result
+// @router /api/sysOperationLog/clean [delete]
+// @Security ApiKeyAuth
+func CleanSysOperationLog(c *gin.Context) {
+	service.SysOperationLogService().CleanSysOperationLog(c)
+}

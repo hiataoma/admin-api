@@ -17,6 +17,7 @@ type ISysRoleService interface {
 	UpdateSysRoleStatus(c *gin.Context, dto entity.UpdateSysRoleStatusDto)
 	QueryRoleMenuIdList(c *gin.Context, Id int)
 	AssignPermissions(c *gin.Context, menu entity.RoleMenu)
+	DeleteSysRoleById(c *gin.Context, dto entity.SysRoleIdDto)
 }
 
 type SysRoleServiceImpl struct{}
@@ -37,6 +38,12 @@ func (s SysRoleServiceImpl) GetSysRoleList(c *gin.Context, PageNum, PageSize int
 	sysRole, count := dao.GetSysRoleList(PageNum, PageSize, RoleName, Status, BeginTime, EndTime)
 	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": PageNum, "list": sysRole})
 	return
+}
+
+// 根据id删除角色
+func (s SysRoleServiceImpl) DeleteSysRoleById(c *gin.Context, dto entity.SysRoleIdDto) {
+	dao.DeleteSysRoleById(dto)
+	result.Success(c, true)
 }
 
 // 分配权限

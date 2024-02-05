@@ -31,6 +31,20 @@ func GetSysRoleList(c *gin.Context) {
 	service.SysRoleService().GetSysRoleList(c, PageNum, PageSize, RoleName, Status, BeginTime, EndTime)
 }
 
+// 根据id删除角色
+// @Summary 根据id删除角色接口
+// @Produce json
+// @Description 根据id删除角色接口
+// @Param data body entity.SysRoleIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/role/delete [delete]
+// @Security ApikeyAuth
+func DeleteSysRoleById(c *gin.Context) {
+	var dto entity.SysRoleIdDto
+	_ = c.BindJSON(&dto)
+	service.SysRoleService().DeleteSysRoleById(c, dto)
+}
+
 // 角色下拉列表
 // @Summary 角色下拉列表
 // @Produce json

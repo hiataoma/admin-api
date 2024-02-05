@@ -12,26 +12,26 @@ import (
 
 var sysMenu entity.SysMenu
 
-// // 新增菜单
-// // @Summary 新增菜单接口
-// // @Produce json
-// // @Description 新增菜单接口
-// // @Param data body entity.SysMenu true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/menu/add [post]
-// // @Security ApiKeyAuth
-// func CreateSysMenu(c *gin.Context) {
-// 	_ = c.BindJSON(&sysMenu)
-// 	service.SysMenuService().CreateSysMenu(c, sysMenu)
-// }
+// 新增菜单
+// @Summary 新增菜单接口
+// @Produce json
+// @Description 新增菜单接口
+// @Param data body entity.SysMenu true "data"
+// @Success 200 {object} result.Result
+// @router /api/menu/add [post]
+// @Security ApiKeyAuth
+func CreateSysMenu(c *gin.Context) {
+	_ = c.BindJSON(&sysMenu)
+	service.SysMenuService().CreateSysMenu(c, sysMenu)
+}
 
-// // 查询新增选项列表
-// // @Summary 查询新增选项列表接口
-// // @Produce json
-// // @Description 查询新增选项列表接口
-// // @Success 200 {object} result.Result
-// // @router /api/menu/vo/list [get]
-// // @Security ApiKeyAuth
+// 查询新增选项列表
+// @Summary 查询新增选项列表接口
+// @Produce json
+// @Description 查询新增选项列表接口
+// @Success 200 {object} result.Result
+// @router /api/menu/vo/list [get]
+// @Security ApiKeyAuth
 func QuerySysMenuVoList(c *gin.Context) {
 	service.SysMenuService().QuerySysMenuVoList(c)
 }
@@ -62,19 +62,19 @@ func UpdateSysMenu(c *gin.Context) {
 	service.SysMenuService().UpdateSysMenu(c, sysMenu)
 }
 
-// // 根据id删除菜单
-// // @Summary 根据id删除菜单接口
-// // @Produce json
-// // @Description 根据id删除菜单接口
-// // @Param data body entity.SysMenuIdDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/menu/delete [delete]
-// // @Security ApiKeyAuth
-// func DeleteSysMenu(c *gin.Context) {
-// 	var dto entity.SysMenuIdDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysMenuService().DeleteSysMenu(c, dto)
-// }
+// 根据id删除菜单
+// @Summary 根据id删除菜单接口
+// @Produce json
+// @Description 根据id删除菜单接口
+// @Param data body entity.SysMenuIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/menu/delete [delete]
+// @Security ApiKeyAuth
+func DeleteSysMenu(c *gin.Context) {
+	var dto entity.SysMenuIdDto
+	_ = c.BindJSON(&dto)
+	service.SysMenuService().DeleteSysMenu(c, dto)
+}
 
 // 查询菜单列表
 // @Summary 查询菜单列表
