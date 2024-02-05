@@ -52,8 +52,15 @@ func register(router *gin.Engine) {
 		jwt.DELETE("/sysLoginInfo/delete", controller.DeleteSysLoginInfoById)       // 删除登录日志信息
 		jwt.GET("/menu/vo/list", controller.QuerySysMenuVoList)                     // 获取菜单列表下拉
 		jwt.GET("/menu/list", controller.GetSysMenuList)                            // 获取菜单列表
+		jwt.GET("/menu/info", controller.GetSysMenu)                                // 获取菜单详情
+		jwt.PUT("/menu/update", controller.UpdateSysMenu)                           // 新增菜单
 		jwt.GET("/dept/list", controller.GetSysDeptList)                            // 获取部门分页列表
+		jwt.POST("/dept/add", controller.CreateSysDept)                             // 新增加部门
+		jwt.GET("/dept/info", controller.GetSysDeptById)                            // 查看部门详情
+		jwt.PUT("/dept/update", controller.GetSysDeptById)                          // 查看部门详情
+		jwt.DELETE("/dept/delete", controller.DeleteSysDeptById)                    // 删除部门
 		jwt.GET("/post/list", controller.GetSysPostList)                            // 获取岗页分页列表
+		jwt.POST("/post/add", controller.CreateSysPost)                             // 新增岗位
 		jwt.POST("/upload", controller.Upload)                                      // 上传文件
 	}
 }

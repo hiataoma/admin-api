@@ -13,17 +13,17 @@ import (
 
 var sysPost entity.SysPost
 
-// // @Summary 新增岗位接口
-// // @Produce json
-// // @Description 新增岗位接口
-// // @Param data body entity.SysPost true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/post/add [post]
-// // @Security ApiKeyAuth
-// func CreateSysPost(c *gin.Context) {
-// 	_ = c.BindJSON(&sysPost)
-// 	service.SysPostService().CreateSysPost(c, sysPost)
-// }
+// @Summary 新增岗位接口
+// @Produce json
+// @Description 新增岗位接口
+// @Param data body entity.SysPost true "data"
+// @Success 200 {object} result.Result
+// @router /api/post/add [post]
+// @Security ApiKeyAuth
+func CreateSysPost(c *gin.Context) {
+	_ = c.BindJSON(&sysPost)
+	service.SysPostService().CreateSysPost(c, sysPost)
+}
 
 // // 分页查询岗位列表
 // // @Summary 分页查询岗位列表

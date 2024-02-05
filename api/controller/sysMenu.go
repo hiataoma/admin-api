@@ -5,6 +5,7 @@ package controller
 import (
 	"admin-api/api/entity"
 	"admin-api/api/service"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -35,31 +36,31 @@ func QuerySysMenuVoList(c *gin.Context) {
 	service.SysMenuService().QuerySysMenuVoList(c)
 }
 
-// // 根据id查询菜单
-// // @Summary 根据id查询菜单
-// // @Produce json
-// // @Description 根据id查询菜单
-// // @Param id query int true "id"
-// // @Success 200 {object} result.Result
-// // @router /api/menu/info [get]
-// // @Security ApiKeyAuth
-// func GetSysMenu(c *gin.Context) {
-// 	Id, _ := strconv.Atoi(c.Query("id"))
-// 	service.SysMenuService().GetSysMenu(c, Id)
-// }
+// 根据id查询菜单
+// @Summary 根据id查询菜单
+// @Produce json
+// @Description 根据id查询菜单
+// @Param id query int true "id"
+// @Success 200 {object} result.Result
+// @router /api/menu/info [get]
+// @Security ApiKeyAuth
+func GetSysMenu(c *gin.Context) {
+	Id, _ := strconv.Atoi(c.Query("id"))
+	service.SysMenuService().GetSysMenu(c, Id)
+}
 
-// // 修改菜单
-// // @Summary 修改菜单接口
-// // @Produce json
-// // @Description 修改菜单接口
-// // @Param data body entity.SysMenu true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/menu/update [put]
-// // @Security ApiKeyAuth
-// func UpdateSysMenu(c *gin.Context) {
-// 	_ = c.BindJSON(&sysMenu)
-// 	service.SysMenuService().UpdateSysMenu(c, sysMenu)
-// }
+// 修改菜单
+// @Summary 修改菜单接口
+// @Produce json
+// @Description 修改菜单接口
+// @Param data body entity.SysMenu true "data"
+// @Success 200 {object} result.Result
+// @router /api/menu/update [put]
+// @Security ApiKeyAuth
+func UpdateSysMenu(c *gin.Context) {
+	_ = c.BindJSON(&sysMenu)
+	service.SysMenuService().UpdateSysMenu(c, sysMenu)
+}
 
 // // 根据id删除菜单
 // // @Summary 根据id删除菜单接口
