@@ -61,6 +61,11 @@ func register(router *gin.Engine) {
 		jwt.DELETE("/dept/delete", controller.DeleteSysDeptById)                    // 删除部门
 		jwt.GET("/post/list", controller.GetSysPostList)                            // 获取岗页分页列表
 		jwt.POST("/post/add", controller.CreateSysPost)                             // 新增岗位
+		jwt.PUT("/post/update", controller.UpdateSysPost)                           // 修改岗位
+		jwt.GET("/post/info", controller.GetSysPostById)                            // 查看岗位详情
+		jwt.PUT("/post/updateStatus", controller.UpdateSysPostStatus)               // 更新岗位状态
+		jwt.DELETE("/post/delete", controller.DeleteSysPostById)                    // 删除岗位
+		jwt.DELETE("/post/batch/delete", controller.BatchDeleteSysPost)             // 根据字典类型获取字典数据
 		jwt.POST("/upload", controller.Upload)                                      // 上传文件
 	}
 }

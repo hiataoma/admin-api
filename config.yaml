@@ -37,6 +37,6 @@ log:
   path: ./log
   name: sys
   # 输出到控制台
-  # model: console
+  model: console
   # 输出到文件
-  model: file
+  # model: file
