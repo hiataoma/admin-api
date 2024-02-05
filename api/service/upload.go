@@ -6,6 +6,7 @@ package service
 import (
 	"admin-api/common/config"
 	"admin-api/common/result"
+	"admin-api/common/util"
 	"fmt"
 	"path"
 	"strconv"
@@ -29,21 +30,22 @@ func (u UploadServiceImpl) Upload(c *gin.Context) {
 	now := time.Now()
 	ext := path.Ext(file.Filename)
 	fileName := strconv.Itoa(now.Nanosecond()) + ext
-	// filePath := fmt.Sprintf("%s%s%s%s",
-	// 	config.Config.ImageSettings.UploadDir,
-	// 	fmt.Sprintf("%04d", now.Year()),
-	// 	fmt.Sprintf("%02d", now.Month()),
-	// 	fmt.Sprintf("%04d", now.Day()))
-	// util.CreateDir(filePath)
-	// fullPath := filePath + "/" + fileName
-	// result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
+	filePath := fmt.Sprintf("%s%s%s%s",
+		config.Config.ImageSettings.UploadDir,
+		fmt.Sprintf("%04d", now.Year()),
+		fmt.Sprintf("%02d", now.Month()),
+		fmt.Sprintf("%04d", now.Day()))
+	util.CreateDir(filePath)
+	fullPath := filePath + "/" + fileName
+	c.SaveUploadedFile(file, fullPath)
+	result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
 
 	// 链接如何反显
 
-	dst := fmt.Sprintf("/Users/haitao/Desktop/haitaoProject/admin-api/upload/%s", fileName)
-	c.SaveUploadedFile(file, dst)
-	fullPath := "/admin-api/upload/" + fileName
-	result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
+	// dst := fmt.Sprintf("/Users/haitao/Desktop/haitaoProject/admin-api/upload/%s", fileName)
+	// c.SaveUploadedFile(file, dst)
+	// fullPath := "/admin-api/upload/" + fileName
+	// result.Success(c, config.Config.ImageSettings.ImageHost+fullPath)
 }
 
 var uploadService = UploadServiceImpl{}

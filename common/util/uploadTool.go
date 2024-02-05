@@ -3,6 +3,7 @@
 package util
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -10,6 +11,7 @@ import (
 func CreateDir(filePath string) error {
 	if !IsExist(filePath) {
 		err := os.MkdirAll(filePath, os.ModePerm)
+		fmt.Println("创建文件", err, filePath)
 		return err
 	}
 	return nil
