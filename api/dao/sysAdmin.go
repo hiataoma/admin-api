@@ -137,27 +137,27 @@ func GetSysAdminList(PageSize, PageNum int, Username, Status, BeginTime, EndTime
 	return sysAdminVo, count
 }
 
-// // 修改个人信息
-// func UpdatePersonal(dto entity.UpdatePersonalDto) (sysAdmin entity.SysAdmin) {
-// 	Db.First(&sysAdmin, dto.Id)
-// 	if dto.Icon != "" {
-// 		sysAdmin.Icon = dto.Icon
-// 	}
-// 	if dto.Username != "" {
-// 		sysAdmin.Username = dto.Username
-// 	}
-// 	if dto.Nickname != "" {
-// 		sysAdmin.Nickname = dto.Nickname
-// 	}
-// 	if dto.Phone != "" {
-// 		sysAdmin.Phone = dto.Phone
-// 	}
-// 	if dto.Email != "" {
-// 		sysAdmin.Email = dto.Email
-// 	}
-// 	Db.Save(&sysAdmin)
-// 	return sysAdmin
-// }
+// 修改个人信息
+func UpdatePersonal(dto entity.UpdatePersonalDto) (sysAdmin entity.SysAdmin) {
+	Db.First(&sysAdmin, dto.Id)
+	if dto.Icon != "" {
+		sysAdmin.Icon = dto.Icon
+	}
+	if dto.Username != "" {
+		sysAdmin.Username = dto.Username
+	}
+	if dto.Nickname != "" {
+		sysAdmin.Nickname = dto.Nickname
+	}
+	if dto.Phone != "" {
+		sysAdmin.Phone = dto.Phone
+	}
+	if dto.Email != "" {
+		sysAdmin.Email = dto.Email
+	}
+	Db.Save(&sysAdmin)
+	return sysAdmin
+}
 
 // // 修改个人密码
 // func UpdatePersonalPassword(dto entity.UpdatePersonalPasswordDto) (sysAdmin entity.SysAdmin) {

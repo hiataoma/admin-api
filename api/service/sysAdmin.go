@@ -21,7 +21,7 @@ type ISysAminService interface {
 	UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
 	ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
 	GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
-	// UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
+	UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
 	// UpdatePersonalPassword(c *gin.Context, dto entity.UpdatePersonalPasswordDto)
 }
 
@@ -144,6 +144,18 @@ func (s SysAdminServiceImpl) UpdateSysAdminStatus(c *gin.Context, dto entity.Upd
 func (s SysAdminServiceImpl) DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto) {
 	dao.DeleteSysAdminById(dto)
 	result.Success(c, true)
+}
+
+// 修改个人信息
+func (s SysAdminServiceImpl) UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto) {
+	err := validator.New().Struct(dto)
+	if err != nil {
+		result.Failed(c, int(result.ApiCode.MissingModificationOfPersonalParameters), result.ApiCode.GetMessage(result.ApiCode.MissingModificationOfPersonalParameters))
+		return
+	}
+	id, _ := jwt.GetAdminId(c)
+	dto.Id = id
+	result.Success(c, dao.UpdatePersonal(dto))
 }
 
 var sysAdminService = SysAdminServiceImpl{}

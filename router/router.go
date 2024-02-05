@@ -18,7 +18,8 @@ func InitRouter() *gin.Engine {
 	// 跌机恢复
 	router.Use(gin.Recovery())
 	router.Use(middleware.Cors())
-	router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir(config.Config.ImageSettings.UploadDir))
+	// router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir(config.Config.ImageSettings.UploadDir))
+	router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir("./upload"))
 	router.Use(middleware.Logger())
 	register(router)
 	return router
@@ -34,6 +35,7 @@ func register(router *gin.Engine) {
 		jwt.GET("/admin/list", controller.GetSysAdminList)                          // 分页获取用户列表
 		jwt.GET("/admin/info", controller.GetSysAdminInfo)                          // 根据id查询用户详情
 		jwt.POST("/admin/add", controller.CreateSysAdmin)                           // 新增用户
+		jwt.PUT("/admin/updatePersonal", controller.UpdatePersonal)                 // 更新用户状态信息
 		jwt.PUT("/admin/updateStatus", controller.UpdateSysAdminStatus)             // 更新用户状态信息
 		jwt.PUT("/admin/update", controller.UpdateSysAdmin)                         // 修改用户
 		jwt.PUT("/admin/updatePassword", controller.ResetSysAdminPassword)          // 重置密码
