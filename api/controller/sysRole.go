@@ -95,3 +95,30 @@ func UpdateSysRoleStatus(c *gin.Context) {
 	_ = c.BindJSON(&dto)
 	service.SysRoleService().UpdateSysRoleStatus(c, dto)
 }
+
+// 根据角色id查询菜单数据
+// @Summary 根据角色id查询菜单数据接口
+// @Produce json
+// @Description 根据角色id查询菜单数据接口
+// @Param id query int true "Id"
+// @Success 200 {object} result.Result
+// @router /api/role/vo/idList [get]
+// @Security ApikeyAuth
+func QueryRoleMenuIdList(c *gin.Context) {
+	Id, _ := strconv.Atoi(c.Query("id"))
+	service.SysRoleService().QueryRoleMenuIdList(c, Id)
+}
+
+// AssignPermissions 分配权限
+// @Summary 分配权限接口
+// @Produce json
+// @Description 分配权限接口
+// @Param data body entity.RoleMenu true "data"
+// @Success 200 {object} result.Result
+// @router /api/role/assignPermissions [put]
+// @Security ApiKeyAuth
+func AssignPermissions(c *gin.Context) {
+	var RoleMenu entity.RoleMenu
+	_ = c.BindJSON(&RoleMenu)
+	service.SysRoleService().AssignPermissions(c, RoleMenu)
+}

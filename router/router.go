@@ -45,7 +45,9 @@ func register(router *gin.Engine) {
 		jwt.GET("/role/vo/list", controller.QuerySysRoleVoList)                     // 获取角色列表
 		jwt.GET("/role/list", controller.GetSysRoleList)                            // 获取角色列表
 		jwt.POST("/role/add", controller.CreateSysRole)                             // 新增角色
+		jwt.GET("/role/vo/idList", controller.QueryRoleMenuIdList)                  // 获取角色菜单列表
 		jwt.GET("/role/info", controller.GetSysRoleById)                            // 获取角色详情
+		jwt.PUT("/role/assignPermissions", controller.AssignPermissions)            // 分配菜单权限
 		jwt.PUT("/role/update", controller.UpdateSysRole)                           // 修改角色
 		jwt.PUT("role/updateStatus", controller.UpdateSysRoleStatus)                // 更新角色状态
 		jwt.GET("/sysOperationLog/list", controller.GetSysOperationLogList)         // 分页获取操作日志列表

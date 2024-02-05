@@ -15,6 +15,8 @@ type ISysRoleService interface {
 	GetSysRoleById(c *gin.Context, Id int)
 	UpdateSysRole(c *gin.Context, dto entity.UpdateSysRoleDto)
 	UpdateSysRoleStatus(c *gin.Context, dto entity.UpdateSysRoleStatusDto)
+	QueryRoleMenuIdList(c *gin.Context, Id int)
+	AssignPermissions(c *gin.Context, menu entity.RoleMenu)
 }
 
 type SysRoleServiceImpl struct{}
@@ -35,6 +37,11 @@ func (s SysRoleServiceImpl) GetSysRoleList(c *gin.Context, PageNum, PageSize int
 	sysRole, count := dao.GetSysRoleList(PageNum, PageSize, RoleName, Status, BeginTime, EndTime)
 	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": PageNum, "list": sysRole})
 	return
+}
+
+// 分配权限
+func (s *SysRoleServiceImpl) AssignPermissions(c *gin.Context, menu entity.RoleMenu) {
+	result.Success(c, dao.AssignPermissions(menu))
 }
 
 // 新增角色
@@ -58,6 +65,16 @@ func (s SysRoleServiceImpl) UpdateSysRole(c *gin.Context, dto entity.UpdateSysRo
 func (s SysRoleServiceImpl) GetSysRoleById(c *gin.Context, Id int) {
 	sysRole := dao.GetSysRoleById(Id)
 	result.Success(c, sysRole)
+}
+
+// 根据角色id查询菜单数据
+func (s *SysRoleServiceImpl) QueryRoleMenuIdList(c *gin.Context, Id int) {
+	roleMenuIdList := dao.QueryRoleMenuIdList(Id)
+	var idList = make([]int, 0)
+	for _, id := range roleMenuIdList {
+		idList = append(idList, id.Id)
+	}
+	result.Success(c, idList)
 }
 
 // 更新角色状态

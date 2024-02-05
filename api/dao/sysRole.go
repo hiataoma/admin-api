@@ -86,6 +86,19 @@ func UpdateSysRole(dto entity.UpdateSysRoleDto) (sysRole entity.SysRole) {
 	return sysRole
 }
 
+// 根据角色的id查询菜单权限数据列表
+func QueryRoleMenuIdList(Id int) (idVo []entity.IdVo) {
+	const menuType int = 3
+	Db.Table("sys_menu sm").
+		Select("sm.id").
+		Joins("LEFT JOIN sys_role_menu srm ON srm.menu_id = sm.id").
+		Joins("LEFT JOIN sys_role sr ON sr.id = srm.role_id").
+		Where("sm.menu_type = ?", menuType).
+		Where("sr.id = ?", Id).
+		Scan(&idVo)
+	return idVo
+}
+
 // 更新状态角色
 func UpdateSysRoleStatus(dto entity.UpdateSysRoleStatusDto) bool {
 	var sysRole entity.SysRole
@@ -96,4 +109,19 @@ func UpdateSysRoleStatus(dto entity.UpdateSysRoleStatusDto) bool {
 		return true
 	}
 	return false
+}
+
+// 分配权限
+func AssignPermissions(menu entity.RoleMenu) (err error) {
+	err = Db.Table("sys_role_menu").Where("role_id = ?", menu.Id).Delete(&entity.SysRoleMenu{}).Error
+	if err != nil {
+		return err
+	}
+	for _, value := range menu.MenuIds {
+		var entity entity.SysRoleMenu
+		entity.RoleId = menu.Id
+		entity.MenuId = value
+		Db.Create(&entity)
+	}
+	return err
 }
