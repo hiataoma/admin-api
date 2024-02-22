@@ -31,6 +31,7 @@ func register(router *gin.Engine) {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	router.GET("/api/captcha", controller.Captcha)
 	router.POST("/api/login", controller.Login)
+	router.GET("/api/welcome", controller.Welcome)
 	jwt := router.Group("/api", middleware.AuthMiddleware(), middleware.LogMiddleware())
 	{
 		jwt.GET("/admin/list", controller.GetSysAdminList)                                 // 分页获取用户列表
