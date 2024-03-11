@@ -4,6 +4,7 @@ import (
 	"admin-api/api/entity"
 	"admin-api/common/util"
 	. "admin-api/pkg/db"
+	"fmt"
 	"time"
 )
 
@@ -118,16 +119,40 @@ func DeleteSysRoleById(dto entity.SysRoleIdDto) {
 }
 
 // 分配权限
+
 func AssignPermissions(menu entity.RoleMenu) (err error) {
-	err = Db.Table("sys_role_menu").Where("role_id = ?", menu.Id).Delete(&entity.SysRoleMenu{}).Error
-	if err != nil {
+	//err = Db.Table("sys_role_menu").Where("role_id = ?", menu.Id).Delete(&entity.SysRoleMenu{}).Error
+	//if err != nil {
+	//	return err
+	//}
+	//for _, value := range menu.MenuIds {
+	//	var entity entity.SysRoleMenu
+	//	entity.RoleId = menu.Id
+	//	entity.MenuId = value
+	//	Db.Create(&entity)
+	//}
+	//return err
+	tx := Db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+			err = fmt.Errorf("panic: %v", r)
+		}
+	}()
+
+	if err = tx.Table("sys_role_menu").Where("role_id = ?", menu.Id).Delete(&entity.SysRoleMenu{}).Error; err != nil {
+		tx.Rollback()
 		return err
 	}
+
+	var entities []entity.SysRoleMenu
 	for _, value := range menu.MenuIds {
-		var entity entity.SysRoleMenu
-		entity.RoleId = menu.Id
-		entity.MenuId = value
-		Db.Create(&entity)
+		entities = append(entities, entity.SysRoleMenu{RoleId: menu.Id, MenuId: value})
 	}
-	return err
+	if err = tx.Create(&entities).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	return tx.Commit().Error
 }

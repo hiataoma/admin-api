@@ -118,6 +118,7 @@ func UpdateSysRoleStatus(c *gin.Context) {
 // @Success 200 {object} result.Result
 // @router /api/role/vo/idList [get]
 // @Security ApikeyAuth
+
 func QueryRoleMenuIdList(c *gin.Context) {
 	Id, _ := strconv.Atoi(c.Query("id"))
 	service.SysRoleService().QueryRoleMenuIdList(c, Id)

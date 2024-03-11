@@ -75,6 +75,7 @@ func (s SysRoleServiceImpl) GetSysRoleById(c *gin.Context, Id int) {
 }
 
 // 根据角色id查询菜单数据
+
 func (s *SysRoleServiceImpl) QueryRoleMenuIdList(c *gin.Context, Id int) {
 	roleMenuIdList := dao.QueryRoleMenuIdList(Id)
 	var idList = make([]int, 0)
